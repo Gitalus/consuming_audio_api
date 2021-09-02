@@ -12,7 +12,7 @@ export const Reproducer = () => {
     console.log(selected);
 
     function handlePlay(data) {
-        if (selected === data) return;
+        if (selected === data.url) return;
         setSelected(data.url);
     }
 
