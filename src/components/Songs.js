@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Songs = () => {
+export const Song = ({ data, handlePlay })  => {
     return (
-        <div className="songs">
-            Hola
+        <div className="songs" onClick={ () => handlePlay(data) }>
+            { data.name }
         </div>
     )
 }
