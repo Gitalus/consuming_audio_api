@@ -9,14 +9,11 @@ export const Reproducer = () => {
         { "id":2, "category":"game", "name":"Mario Star", "url":"files/mario/songs/hurry-starman.mp3"},
         { "id":3, "category":"game", "name":"Mario Overworld", "url":"files/mario/songs/overworld.mp3"}
     ])
-    console.log(selected);
 
     function handlePlay(data) {
         if (selected === data.url) return;
         setSelected(data.url);
     }
-
-
 
     return (
         <div className="container">

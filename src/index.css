@@ -19,7 +19,9 @@ body {
 
 .container {
   width: 550px;
-  height: 650px;
+  height: auto;
+  min-height: 300px;
+  max-height: 650px;
   background-color: rgba(30, 30, 30, 0.95);
   border-radius: 15px;
   box-shadow: 0 0 30px 10px rgb(200 200 200 / 10%);
