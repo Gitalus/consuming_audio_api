@@ -19,15 +19,14 @@ body {
 }
 
 .container {
+  position: relative;
   width: 550px;
   height: auto;
-  min-height: 300px;
   max-height: 650px;
   background-color: rgba(30, 30, 30, 0.95);
   border-radius: 15px;
   box-shadow: 0 0 30px 10px rgb(200 200 200 / 10%);
   overflow: hidden;
-  position: relative;
 }
 
 .list-songs {
@@ -49,7 +48,7 @@ body {
 }
 
 footer {
-  position: absolute;
+  position: sticky;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,9 +62,9 @@ footer {
 }
 
 .play-control {
-  font-size: 40px;
+  font-size: 50px;
   cursor: pointer;
-  margin: 0 10px
+  margin: 0 10px;
 }
 
 .play-control:hover {
@@ -73,13 +72,33 @@ footer {
 }
 
 .controls {
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
-  margin: 0 10px
+  margin: 0 10px;
 }
 
 .controls:hover {
   transform: scale(115%);
+}
+
+.nSong {
+  font-weight: 600;
+  color: grey;
+  margin-right: 8px;
+}
+
+.active .nSong {
+  color: white;
+}
+
+.active {
+  background-color: #22b355;
+  color: white;
+}
+
+.active:hover {
+  background-color: #1a9143;
+
 }
 
 code {
