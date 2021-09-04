@@ -21,7 +21,6 @@ body {
   position: relative;
   width: 550px;
   height: auto;
-  max-height: 650px;
   background-color: rgba(30, 30, 30, 0.95);
   border-radius: 15px;
   box-shadow: 0 10px 25px 10px rgb(0 0 0 / 60%);
@@ -110,4 +109,13 @@ footer {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+/* Media Queries */
+@media only screen and (max-width: 575px) {
+  .container {
+    min-width: 400px;
+    width: auto;
+  }
 }
