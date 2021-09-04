@@ -41,7 +41,7 @@ export function handleMusic({ songs, current, setCurrent, playing, setPlaying, a
     }
 
     function togglePlayPause() {
-        if (current !== null) {
+        if (songs !== null) {
             setPlaying(!playing);
             playing ? audio.current.pause() : audio.current.play();
         }

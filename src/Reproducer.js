@@ -1,29 +1,29 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { handleMusic } from './helper';
+import { useFetch } from './hooks/useFetch';
 
 export const Reproducer = () => {
-    const [songs] = useState([
-        { "id":1, "category":"game", "name":"Mario Castle", "url":"files/mario/songs/castle.mp3" },
-        { "id":2, "category":"game", "name":"Mario Star", "url":"files/mario/songs/hurry-starman.mp3"},
-        { "id":3, "category":"game", "name":"Mario Overworld", "url":"files/mario/songs/overworld.mp3"}
-    ]);
     const [current, setCurrent] = useState(0);
     const [playing, setPlaying] = useState(false);
-
-    const audio = useRef();
+    const songs = useFetch();
     
+    const audio = useRef();
+
     useEffect(() => {
-        audio.current.src = `https://assets.breatheco.de/apis/sound/${songs[current].url}`;
-    }, [])
+        if (songs) {
+            audio.current.src = `https://assets.breatheco.de/apis/sound/${songs[current].url}`;
+        }
+    }, [songs])
 
     const { selectPlay, nextSong, prevSong, togglePlayPause } = handleMusic({ songs, current, setCurrent, playing, setPlaying, audio });
 
     return (
         <div className="container">
-            <div className="list-songs">
+            <div className="list-songs custom-scroll">
                 {
+                    !!songs &&
                     songs.map( ( song, idx ) => {
-                        return <div key = {song.id} className={"songs" + (playing && current === idx ? " active" : "") + ( (audio.current?.paused && current === idx && !playing) ? " paused" : "")} onClick={ () => selectPlay(idx)}>
+                        return <div key={idx} className={"songs" + (playing && current === idx ? " active" : "") + ( audio.current?.currentTime != 0 && current === idx && !playing ? " paused" : "")} onClick={ () => selectPlay(idx)}>
                                     <span className="nSong">{idx + 1}</span>{ song.name }
                                 </div>
                     })
