@@ -37,7 +37,7 @@ export const Reproducer = () => {
                     ):(<i className="fas fa-play-circle play-control" onClick={ () => togglePlayPause() }></i>)
                 }
                 <i className="fas fa-step-forward controls" onClick={ () => nextSong() }></i>
-                <audio ref={ audio } hidden></audio>
+                <audio ref={ audio } hidden onEnded={() => nextSong() }></audio>
             </footer>
         </div>
     )
