@@ -99,6 +99,14 @@ footer {
 
 }
 
+.paused {
+  background: rgba(0, 255, 89, 0.11);
+}
+
+.paused:hover {
+  background: rgba(0, 255, 89, 0.31);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

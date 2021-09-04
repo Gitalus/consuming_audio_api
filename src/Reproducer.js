@@ -16,14 +16,14 @@ export const Reproducer = () => {
         audio.current.src = `https://assets.breatheco.de/apis/sound/${songs[current].url}`;
     }, [])
 
-    const { selectPlay, nextSong, prevSong, togglePlayPause } = handleMusic(songs, current, setCurrent, playing, setPlaying, audio);
+    const { selectPlay, nextSong, prevSong, togglePlayPause } = handleMusic({ songs, current, setCurrent, playing, setPlaying, audio });
 
     return (
         <div className="container">
             <div className="list-songs">
                 {
                     songs.map( ( song, idx ) => {
-                        return <div className={"songs" + (playing && current === idx ? " active" : "")} onClick={ () => selectPlay(idx)}>
+                        return <div key = {song.id} className={"songs" + (playing && current === idx ? " active" : "") + ( (audio.current?.paused && current === idx && !playing) ? " paused" : "")} onClick={ () => selectPlay(idx)}>
                                     <span className="nSong">{idx + 1}</span>{ song.name }
                                 </div>
                     })

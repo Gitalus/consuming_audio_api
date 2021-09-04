@@ -1,6 +1,6 @@
 
 
-export function handleMusic( songs, current, setCurrent, playing, setPlaying, audio ) {
+export function handleMusic({ songs, current, setCurrent, playing, setPlaying, audio }) {
 
     function selectPlay(idx) {
         if (current === idx && playing) {
