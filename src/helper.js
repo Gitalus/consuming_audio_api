@@ -66,11 +66,15 @@ export function handleMusic({ songs, current, setCurrent, playing, setPlaying, a
 
     function shuffleSong() {
         let randomValue = Math.floor(Math.random() * songs.length);
-        audioPlayer.current.src = `https://assets.breatheco.de/apis/sound/${songs[randomValue].url}`;
-        animationRef.current = requestAnimationFrame(whilePlaying);
-        audioPlayer.current.play();
-        setPlaying(true);
-        setCurrent(randomValue);
+        if (randomValue === current) {
+            shuffleSong();
+        }else {
+            audioPlayer.current.src = `https://assets.breatheco.de/apis/sound/${songs[randomValue].url}`;
+            animationRef.current = requestAnimationFrame(whilePlaying);
+            audioPlayer.current.play();
+            setPlaying(true);
+            setCurrent(randomValue);
+        }
     }
 
     return { selectPlay, nextSong, prevSong, togglePlayPause }
