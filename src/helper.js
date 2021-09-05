@@ -1,6 +1,6 @@
 
 
-export function handleMusic({ songs, current, setCurrent, playing, setPlaying, audio }) {
+export function handleMusic({ songs, current, setCurrent, playing, setPlaying, audio, repeat, shuffle }) {
 
     function selectPlay(idx) {
         if (current === idx && playing) {
@@ -12,8 +12,12 @@ export function handleMusic({ songs, current, setCurrent, playing, setPlaying, a
         setPlaying(true);
     }
 
-    function nextSong() {
-        if (current === songs.length - 1) {
+    function nextSong(e = null) {
+        if (repeat && e === null) return;
+        else if (shuffle) {
+            shuffleSong();
+        }
+        else if (current === songs.length - 1) {
             audio.current.src = `https://assets.breatheco.de/apis/sound/${songs[0].url}`;
             audio.current.play();
             setPlaying(true);
@@ -27,7 +31,10 @@ export function handleMusic({ songs, current, setCurrent, playing, setPlaying, a
     }
     
     function prevSong() {
-        if (current === 0) {
+        if (shuffle) {
+            shuffleSong();
+        }
+        else if (current === 0) {
             audio.current.src = `https://assets.breatheco.de/apis/sound/${songs[songs.length - 1].url}`;
             audio.current.play();
             setPlaying(true);
@@ -45,6 +52,13 @@ export function handleMusic({ songs, current, setCurrent, playing, setPlaying, a
             setPlaying(!playing);
             playing ? audio.current.pause() : audio.current.play();
         }
+    }
+
+    function shuffleSong() {
+        let randomValue = Math.floor(Math.random() * songs.length);
+        audio.current.src = `https://assets.breatheco.de/apis/sound/${songs[randomValue].url}`;
+        audio.current.play();
+        setCurrent(randomValue);
     }
 
     return { selectPlay, nextSong, prevSong, togglePlayPause }
