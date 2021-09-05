@@ -7,13 +7,16 @@ export const Reproducer = () => {
     const [playing, setPlaying] = useState(false);
     const [repeat, setRepeat] = useState(false);
     const [shuffle, setShuffle] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0)
+    const [currentTime, setCurrentTime] = useState(0);
 
     const songs = useFetch(); // Promise to fetch the song list, null by default
     
     const audioPlayer = useRef();
     const progressBar = useRef();
     const animationRef = useRef(); // reference animation of thumb in progressBar
+    const volumeBar = useRef();
+
+
     
     const { selectPlay, nextSong, prevSong, togglePlayPause } = handleMusic({ 
         songs, 
@@ -32,7 +35,6 @@ export const Reproducer = () => {
         if (songs) {
             audioPlayer.current.src = `https://assets.breatheco.de/apis/sound/${songs[0].url}`;
             audioPlayer.current.currentTime = currentTime;
-            changePlayerCurrentTime();
         }
     }, [songs])
 
@@ -40,7 +42,6 @@ export const Reproducer = () => {
         const seconds = Math.floor(audioPlayer.current.duration);
         progressBar.current.max = seconds;
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
-
 
     function whilePlaying() {
         progressBar.current.value = audioPlayer.current.currentTime;
@@ -56,6 +57,11 @@ export const Reproducer = () => {
     function changePlayerCurrentTime() {
         progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / progressBar.current.max * 100}%`);
         setCurrentTime(progressBar.current.value);
+    }
+
+    function changeVolume() {
+        audioPlayer.current.volume = volumeBar.current.value;
+        volumeBar.current.style.setProperty('--before-width', `${volumeBar.current.value * 100}%`);
     }
 
     return (
@@ -89,7 +95,21 @@ export const Reproducer = () => {
                                                                                                             audioPlayer.current.loop = !audioPlayer.current.loop;
                                                                                                         }}></i>
                 <audio ref={ audioPlayer } hidden onEnded={() => nextSong() }></audio>
-                <i className="fal fa-volume-up"></i>
+                <div className="music-container">
+                    <i className="fal fa-volume-up">
+                        <div className="barContainer">
+                            <input 
+                                ref={ volumeBar }
+                                className="volumeBar" 
+                                type="range" 
+                                onChange={ changeVolume }
+                                step="0.01"
+                                min="0"
+                                max="1"
+                            />
+                        </div>
+                    </i>
+                </div>
             </footer>
         </div>
     )

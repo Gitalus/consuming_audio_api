@@ -172,7 +172,67 @@ footer .progress-container {
   cursor: pointer;
   margin-top: -1px;
 }
+
+.progress-bar::-moz-range-progress {
+  background-color: var(--bg-progress-bar);
+  height: var(--height-bar);
+}
 /* End Progress Bar */
+
+.fa-volume-up {
+  cursor: pointer;
+  position: relative;
+}
+
+.barContainer {
+  position: absolute;
+  left: 5px;
+  top: -23px;
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  /* background-color: cornsilk; */
+  width: 165px;
+  height: 60px;
+  pointer-events: auto;
+  cursor:initial;
+}
+
+.fa-volume-up:hover .barContainer {
+  visibility: visible;
+}
+
+.volumeBar {
+  --bg-progress-bar: #29c760;
+  --before-width: 100%;
+  
+  appearance: none;
+  position: absolute;
+  left: 20px;
+  border-radius: 5px;
+  width: 90px;
+  height: 7px;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+  outline: none;
+}
+
+.volumeBar::before {
+  content: "";
+  height: 7px;
+  width: var(--before-width);
+  border-radius: 5px;
+  background-color: var(--bg-progress-bar);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+.volumeBar::-webkit-slider-thumb {
+  visibility: hidden;
+}
+
 .play-control {
   font-size: 50px;
   cursor: pointer;
