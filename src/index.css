@@ -94,9 +94,9 @@ footer .progress-container {
 }
 /* Progress Bar */
 .progress-bar {
-  --seek-before-width: 100px;
+  --seek-before-width: 0;
   --bg-progress-bar: #29c760;
-  --unfilled-bar: white;
+  --unfilled-bar: rgb(56, 56, 56);
   --height-bar: 6px;
 
 
@@ -162,6 +162,7 @@ footer .progress-container {
 }
 
 .progress-bar::-webkit-slider-thumb {
+  visibility: hidden;
   -webkit-appearance: none;
   border: 0px solid #000000;
   height: 10px;
