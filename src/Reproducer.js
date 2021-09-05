@@ -5,11 +5,12 @@ import { useFetch } from './hooks/useFetch';
 export const Reproducer = () => {
     const [current, setCurrent] = useState(0);
     const [playing, setPlaying] = useState(false);
-    const songs = useFetch();
     const [repeat, setRepeat] = useState(false);
     const [shuffle, setShuffle] = useState(false);
+
+    const songs = useFetch(); // Promise to fetch the song list, null by default
     
-    const audio = useRef();
+    const audio = useRef(); // audio-player ref
 
     useEffect(() => {
         if (songs) {
@@ -17,7 +18,16 @@ export const Reproducer = () => {
         }
     }, [songs])
 
-    const { selectPlay, nextSong, prevSong, togglePlayPause } = handleMusic({ songs, current, setCurrent, playing, setPlaying, audio, repeat, shuffle });
+    const { selectPlay, nextSong, prevSong, togglePlayPause } = handleMusic({ 
+        songs, 
+        current, 
+        setCurrent,
+        playing, 
+        setPlaying, 
+        audio, 
+        repeat, 
+        shuffle 
+    });
 
     return (
         <div className="container">
@@ -32,6 +42,9 @@ export const Reproducer = () => {
                 }
             </div>
             <footer>
+                <div className="progress-container">
+                    <input type="range" className="progress-bar" />
+                </div>
                 <i className={"far fa-random controls" + (shuffle ? " active-icon" : "")} onClick={ () => {
                                                                                                             setShuffle(!shuffle);
                                                                                                         }}></i>
