@@ -94,9 +94,71 @@ footer .progress-container {
 }
 /* Progress Bar */
 .progress-bar {
-  -webkit-appearance: none;
+  --seek-before-width: 100px;
+  --bg-progress-bar: #29c760;
+  --unfilled-bar: white;
+  --height-bar: 6px;
+
+
+
+  appearance: none;
   margin: 10px 0;
   width: 100%;
+  background: var(--unfilled-bar);
+  height: var(--height-bar);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+}
+
+.progress-bar:hover {
+  transform: scaleY(130%);
+}
+
+/* Safari - Progress Bar */
+.progress-bar::-webkit-slider-runnable-track {
+  margin: 10px 0;
+  width: 100%;
+  background: var(--unfilled-bar);
+  height: var(--height-bar);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+}
+/* Firefox - Progress Bar */
+
+.progress-bar::-moz-range-track {
+  margin: 10px 0;
+  width: 100%;
+  background: var(--unfilled-bar);
+  height: var(--height-bar);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+}
+
+.progress-bar::-moz-focus-outer {
+  border: 0;
+}
+
+/* Charge bar - Chrome and Safari */
+
+.progress-bar::before {
+  content: "";
+  height: var(--height-bar);
+  width: var(--seek-before-width);
+  background-color: var(--bg-progress-bar);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* Charge bar - Firefox */
+.progress-bar::-moz-range-progress {
+  background-color: var(--bg-progress-bar);
+  height: var(--height-bar);
 }
 
 .progress-bar::-webkit-slider-thumb {
@@ -108,14 +170,6 @@ footer .progress-container {
   background: #ffffff;
   cursor: pointer;
   margin-top: -1px;
-}
-
-.progress-bar::-webkit-slider-runnable-track {
-
-  height: 8px;
-  cursor: pointer;
-  background: #29c760;
-  outline: none;
 }
 /* End Progress Bar */
 .play-control {
