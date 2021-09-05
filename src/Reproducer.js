@@ -8,6 +8,7 @@ export const Reproducer = () => {
     const [repeat, setRepeat] = useState(false);
     const [shuffle, setShuffle] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
+    const [currentVolume, setcurrentVolume] = useState(1);
 
     const songs = useFetch(); // Promise to fetch the song list, null by default
     
@@ -34,7 +35,6 @@ export const Reproducer = () => {
     useEffect(() => {
         if (songs) {
             audioPlayer.current.src = `https://assets.breatheco.de/apis/sound/${songs[0].url}`;
-            audioPlayer.current.currentTime = currentTime;
         }
     }, [songs])
 
@@ -62,6 +62,7 @@ export const Reproducer = () => {
     function changeVolume() {
         audioPlayer.current.volume = volumeBar.current.value;
         volumeBar.current.style.setProperty('--before-width', `${volumeBar.current.value * 100}%`);
+        setcurrentVolume(volumeBar.current.value);
     }
 
     return (
@@ -78,7 +79,13 @@ export const Reproducer = () => {
             </div>
             <footer>
                 <div className="progress-container">
-                    <input type="range" className="progress-bar" defaultValue="0" ref={ progressBar } onChange={ changeRange } />
+                    <input 
+                        type="range" 
+                        className="progress-bar" 
+                        defaultValue="0" 
+                        ref={ progressBar } 
+                        onChange={ changeRange } 
+                    />
                 </div>
                 <i className={"far fa-random controls" + (shuffle ? " active-icon" : "")} onClick={ () => {
                                                                                                             setShuffle(!shuffle);
@@ -96,7 +103,7 @@ export const Reproducer = () => {
                                                                                                         }}></i>
                 <audio ref={ audioPlayer } hidden onEnded={() => nextSong() }></audio>
                 <div className="music-container">
-                    <i className="fal fa-volume-up">
+                    <i className={currentVolume == 0 ? "fal fa-volume-slash" : "fal fa-volume-up"}>
                         <div className="barContainer">
                             <input 
                                 ref={ volumeBar }

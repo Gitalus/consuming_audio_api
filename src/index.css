@@ -179,8 +179,8 @@ footer .progress-container {
 }
 /* End Progress Bar */
 
+.fa-volume-slash,
 .fa-volume-up {
-  cursor: pointer;
   position: relative;
 }
 
@@ -195,11 +195,17 @@ footer .progress-container {
   width: 165px;
   height: 60px;
   pointer-events: auto;
-  cursor:initial;
+  cursor: initial;
 }
 
+.fa-volume-slash:hover .barContainer,
 .fa-volume-up:hover .barContainer {
   visibility: visible;
+}
+
+.music-container {
+  width: 25px;
+  height: 23px;
 }
 
 .volumeBar {
